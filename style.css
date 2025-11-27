@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-
+    box-sizing: border-box; /* Importante para o padding não estourar a largura */
 }
 
 body {
@@ -10,10 +10,11 @@ body {
     padding: 24px 160px;
     height: 100vh;
     font-family: "Noto Sans", sans-serif;
-
-    overflow: hidden;
+    overflow: hidden; /* No desktop não rola */
+    position: relative; /* Necessário para os elementos absolutos funcionarem bem */
 }
 
+/* O Fundo preto inclinado */
 body::before {
     content: '';
     background-color: #101010;
@@ -23,11 +24,12 @@ body::before {
     transform: rotate(-70deg);
     width: 100%;
     height: 130%;
+    z-index: -1; /* Garante que fique atrás de tudo */
 }
 
+/* O Texto NIKE gigante no fundo */
 body::after {
     content: 'Nike';
-    color: #ffffff;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,10 +37,9 @@ body::after {
     color: black;
     font-size: 230px;
     font-weight: bold;
-    opacity: 0.5;
-
+    opacity: 0.1; /* Diminuí um pouco a opacidade para não brigar com o texto */
+    z-index: -1; /* Garante que fique atrás de tudo */
 }
-
 
 .logo {
     width: 80px;
@@ -50,11 +51,13 @@ h4 {
 
 h1 {
     font-size: 80px;
+    line-height: 1; /* Melhora o espaçamento entre linhas */
 }
 
 p {
     font-size: 16px;
     margin-bottom: 40px;
+    line-height: 1.5; /* Melhora leitura */
 }
 
 .botao-carrinho {
@@ -66,6 +69,7 @@ p {
     font-size: 18px;
     color: #000000;
     transition: background-color 0.5s ease, transform 0.2s ease;
+    font-weight: bold;
 }
 
 .botao-carrinho:hover {
@@ -78,6 +82,7 @@ p {
     filter: drop-shadow(30px 45px 40px #161616);
     transform: rotate(-25deg);
     transition: 1s;
+    pointer-events: none; /* Impede que arrastem a imagem */
 }
 
 .troca-efeito {
@@ -85,39 +90,34 @@ p {
     transform: rotate(-25deg) translateY(-30px);
 }
 
-
 .caixa-principal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 75%;
     position: relative;
-
-
     z-index: 1;
-
 }
 
 .caixa-texto {
     max-width: 500px;
 }
 
-
 .caixa-botoes {
     z-index: 2;
     position: relative;
     display: flex;
     gap: 15px;
-
+    justify-content: center; /* Centraliza os botões */
 }
 
 .botoes {
-    width: 60px;
-    height: 60px;
-    border-radius: 50px;
+    width: 40px; /* Diminuí um pouco para ficar mais elegante */
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s ease;
-    
+    border: 2px solid rgba(0,0,0,0.1); /* Borda sutil */
 }
 
 .botoes:active {
@@ -125,17 +125,140 @@ p {
 }
 
 .botoes:hover {
-     transform: translateY(-10px);
+     transform: translateY(-5px);
 }
 
-.verde {
-    background: #ccee66;
-}
+.verde { background: #ccee66; }
+.azul { background: #58cced; }
+.rosa { background: #ff9eb5; }
 
-.azul {
-    background: #58cced;
-}
 
-.rosa {
-    background: #ff9eb5;
+
+/* =========================================
+   VERSÃO FINAL RESPONSIVA (MOBILE)
+   Substitua o @media anterior por este
+   ========================================= */
+
+@media (max-width: 950px) {
+    body {
+        /* Aumentei o padding bottom para 100px para sobrar espaço no final */
+        padding: 20px 20px 100px 20px; 
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /* --- 1. CONSERTANDO O FUNDO E O NOME "NIKE" --- */
+    
+    body::before {
+        /* O fundo preto agora ocupa 65% da tela para dar espaço ao texto */
+        width: 150%;
+        height: 65%; 
+        top: -15%;
+        left: -25%;
+        transform: rotate(-10deg); /* Inclinação mais estilosa */
+        border-bottom-right-radius: 150px; /* Curva mais suave */
+        z-index: -2;
+    }
+
+    body::after {
+        /* AQUI ESTÁ A CORREÇÃO DO NOME SUMIDO */
+        content: 'NIKE'; /* Garante que o texto exista */
+        color: #ffffff;  /* Mudei para BRANCO para aparecer no fundo preto */
+        font-size: 120px; /* Bem grande */
+        top: 10%;         /* Fica no topo, atrás do título */
+        left: 50%;
+        transform: translateX(-50%); /* Centraliza perfeitamente */
+        opacity: 0.05;    /* Bem transparente para ficar elegante (marca d'água) */
+        z-index: -1;
+    }
+
+    /* --- 2. DANDO ESPAÇO NO TEXTO (O "APERTADO") --- */
+
+    .caixa-principal {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        margin-top: 50px; /* Mais espaço do topo */
+        height: auto;
+        gap: 20px; 
+        margin-bottom: 40px;
+    }
+
+    .caixa-texto {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    h4 {
+        margin-top: 10px;
+        font-size: 18px;
+        letter-spacing: 2px; /* Deixa mais chique */
+    }
+
+    h1 {
+        font-size: 48px; /* Grande e legível */
+        line-height: 1;
+        margin: 10px 0;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.6; /* Mais espaço entre as linhas do texto */
+        max-width: 340px;
+        margin-bottom: 30px;
+        color: #e0e0e0; /* Um cinza claro fica melhor de ler no preto */
+    }
+
+    .botao-carrinho {
+        width: 100%;
+        max-width: 280px; /* Botão largo e fácil de clicar */
+        padding: 15px;    /* Mais gordinho */
+        margin-bottom: 20px;
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.3); /* Sombra para destacar */
+    }
+
+    /* --- 3. MELHORANDO O POSICIONAMENTO DO TÊNIS --- */
+
+    .caixa-img {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        /* O pulo do gato: margem negativa para puxar o tênis pra cima */
+        margin-top: 0px; 
+        position: relative;
+        z-index: 10;
+    }
+
+    .img-tênis {
+        width: 80%;
+        max-width: 380px; /* Tênis maior, é a estrela do site! */
+        
+        /* Ângulo "Heroico": inclinado e levemente apontando pra cima */
+        transform: rotate(-20deg) scale(1.1); 
+        
+        /* Sombra mais forte para parecer que está flutuando alto */
+        filter: drop-shadow(20px 40px 20px rgba(0,0,0,0.5));
+        
+        margin-left: -20px; /* Um leve ajuste para centralizar visualmente */
+    }
+
+    /* --- BOTÕES COLORIDOS --- */
+    .caixa-botoes {
+        justify-content: center;
+        margin-top: 20%; /* Espaço depois do tênis */
+        padding-bottom: 30px;
+        gap: 25px; /* Botões mais afastados uns dos outros */
+    }
+    
+    .botoes {
+        width: 50px; /* Botões maiores para dedo */
+        height: 50px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    }
 }
