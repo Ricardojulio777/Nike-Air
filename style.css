@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Importante para o padding não estourar a largura */
+
 }
 
 body {
@@ -10,11 +10,10 @@ body {
     padding: 24px 160px;
     height: 100vh;
     font-family: "Noto Sans", sans-serif;
-    overflow: hidden; /* No desktop não rola */
-    position: relative; /* Necessário para os elementos absolutos funcionarem bem */
+
+    overflow: hidden;
 }
 
-/* O Fundo preto inclinado */
 body::before {
     content: '';
     background-color: #101010;
@@ -24,12 +23,11 @@ body::before {
     transform: rotate(-70deg);
     width: 100%;
     height: 130%;
-    z-index: -1; /* Garante que fique atrás de tudo */
 }
 
-/* O Texto NIKE gigante no fundo */
 body::after {
     content: 'Nike';
+    color: #ffffff;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -37,9 +35,10 @@ body::after {
     color: black;
     font-size: 230px;
     font-weight: bold;
-    opacity: 0.1; /* Diminuí um pouco a opacidade para não brigar com o texto */
-    z-index: -1; /* Garante que fique atrás de tudo */
+    opacity: 0.5;
+
 }
+
 
 .logo {
     width: 80px;
@@ -51,13 +50,11 @@ h4 {
 
 h1 {
     font-size: 80px;
-    line-height: 1; /* Melhora o espaçamento entre linhas */
 }
 
 p {
     font-size: 16px;
     margin-bottom: 40px;
-    line-height: 1.5; /* Melhora leitura */
 }
 
 .botao-carrinho {
@@ -69,7 +66,6 @@ p {
     font-size: 18px;
     color: #000000;
     transition: background-color 0.5s ease, transform 0.2s ease;
-    font-weight: bold;
 }
 
 .botao-carrinho:hover {
@@ -82,7 +78,6 @@ p {
     filter: drop-shadow(30px 45px 40px #161616);
     transform: rotate(-25deg);
     transition: 1s;
-    pointer-events: none; /* Impede que arrastem a imagem */
 }
 
 .troca-efeito {
@@ -90,34 +85,39 @@ p {
     transform: rotate(-25deg) translateY(-30px);
 }
 
+
 .caixa-principal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 75%;
     position: relative;
+
+
     z-index: 1;
+
 }
 
 .caixa-texto {
     max-width: 500px;
 }
 
+
 .caixa-botoes {
     z-index: 2;
     position: relative;
     display: flex;
     gap: 15px;
-    justify-content: center; /* Centraliza os botões */
+
 }
 
 .botoes {
-    width: 40px; /* Diminuí um pouco para ficar mais elegante */
-    height: 40px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
     cursor: pointer;
     transition: transform 0.2s ease;
-    border: 2px solid rgba(0,0,0,0.1); /* Borda sutil */
+    
 }
 
 .botoes:active {
@@ -125,14 +125,20 @@ p {
 }
 
 .botoes:hover {
-     transform: translateY(-5px);
+     transform: translateY(-10px);
 }
 
-.verde { background: #ccee66; }
-.azul { background: #58cced; }
-.rosa { background: #ff9eb5; }
+.verde {
+    background: #ccee66;
+}
 
+.azul {
+    background: #58cced;
+}
 
+.rosa {
+    background: #ff9eb5;
+}
 
 /* =========================================
    VERSÃO FINAL RESPONSIVA (MOBILE)
@@ -193,6 +199,7 @@ p {
         flex-direction: column;
         align-items: center;
         padding: 0 10px;
+        margin-right: 30px;
     }
 
     h4 {
